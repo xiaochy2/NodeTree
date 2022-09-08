@@ -48,6 +48,7 @@ async function main() {
     await addDataToMap(ids)
     const allUniqIds = Object.keys(map)
     let maxConnectionCount = 0
+    let nodeWithMaxConnections = ""
     allUniqIds.forEach(id => {
         let child_id_count = map[id].child_node_ids.length
         let parent_id_count = map[id].parent_node_ids.length
@@ -55,11 +56,13 @@ async function main() {
 
         if(total_count > maxConnectionCount) {
             maxConnectionCount = total_count
+            nodeWithMaxConnections = id
         }
     })
     const result = {
         uniqIdsCount: allUniqIds.length,
         maxConnectionCount: maxConnectionCount,
+        nodeWithMaxConnections: nodeWithMaxConnections
     }
 
     console.log(result)
